@@ -1,4 +1,4 @@
-import dbClient from '../../utils/db';
+import clientDb from '../../utils/db';
 
 describe('+ AuthController', () => {
   const mockUser = {
@@ -9,7 +9,7 @@ describe('+ AuthController', () => {
 
   before(function (done) {
     this.timeout(10000);
-    dbClient.usersCollection()
+    clientDb.usersCollection()
       .then((usersCollection) => {
         usersCollection.deleteMany({ email: mockUser.email })
           .then(() => {

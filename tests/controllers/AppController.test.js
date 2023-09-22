@@ -1,9 +1,9 @@
-import dbClient from '../../utils/db';
+import clientDb from '../../utils/db';
 
 describe('+ AppController', () => {
   before(function (done) {
     this.timeout(10000);
-    Promise.all([dbClient.usersCollection(), dbClient.filesCollection()])
+    Promise.all([clientDb.usersCollection(), clientDb.filesCollection()])
       .then(([usersCollection, filesCollection]) => {
         Promise.all([usersCollection.deleteMany({}), filesCollection.deleteMany({})])
           .then(() => done())
@@ -40,7 +40,7 @@ describe('+ AppController', () => {
 
     it('+ Correct statistics about db collections [alt]', function (done) {
       this.timeout(10000);
-      Promise.all([dbClient.usersCollection(), dbClient.filesCollection()])
+      Promise.all([clientDb.usersCollection(), clientDb.filesCollection()])
         .then(([usersCollection, filesCollection]) => {
           Promise.all([
             usersCollection.insertMany([{ email: 'john@mail.com' }]),

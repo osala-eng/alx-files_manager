@@ -1,7 +1,7 @@
 import { tmpdir } from 'os';
 import { join as joinPath } from 'path';
 import { existsSync, readdirSync, unlinkSync, statSync } from 'fs';
-import dbClient from '../../utils/db';
+import clientDb from '../../utils/db';
 
 describe('+ FilesController', () => {
   const baseDir = `${process.env.FOLDER_PATH || ''}`.trim().length > 0
@@ -65,7 +65,7 @@ describe('+ FilesController', () => {
     }
   };
   const emptyDatabaseCollections = (callback) => {
-    Promise.all([dbClient.usersCollection(), dbClient.filesCollection()])
+    Promise.all([clientDb.usersCollection(), clientDb.filesCollection()])
       .then(([usersCollection, filesCollection]) => {
         Promise.all([usersCollection.deleteMany({}), filesCollection.deleteMany({})])
           .then(() => {

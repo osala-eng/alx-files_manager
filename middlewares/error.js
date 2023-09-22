@@ -1,5 +1,3 @@
-import { Request, Response, NextFunction } from 'express';
-
 /**
  * Represents an error in this API.
  */
@@ -18,7 +16,7 @@ export class APIError extends Error {
  * @param {Response} res The Express response object.
  * @param {NextFunction} next The Express next function.
  */
-export const errorResponse = (err, req, res, next) => {
+export const errorResponse = (err, req, res) => {
   const defaultMsg = `Failed to process ${req.url}`;
 
   if (err instanceof APIError) {
