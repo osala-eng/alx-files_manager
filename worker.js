@@ -3,8 +3,10 @@ import { promisify } from 'util';
 import Queue from 'bull/lib/queue';
 import imgThumbnail from 'image-thumbnail';
 import mongoDBCore from 'mongodb/lib/core';
-import dbClient from './utils/db';
 import Mailer from './utils/mailer';
+import client from './utils/db';
+
+const dbClient = client;
 
 const writeFileAsync = promisify(writeFile);
 const fileQueue = new Queue('thumbnail generation');

@@ -1,6 +1,6 @@
 import sha1 from 'sha1';
 import Queue from 'bull/lib/queue';
-import dbClient from '../utils/db';
+import clientDb from '../utils/db';
 
 const userQueue = new Queue('email sending');
 
@@ -17,13 +17,13 @@ export default class UsersController {
       res.status(400).json({ error: 'Missing password' });
       return;
     }
-    const user = await (await dbClient.usersCollection()).findOne({ email });
+    const user = await (await clientDb.usersCollection()).findOne({ email });
 
     if (user) {
       res.status(400).json({ error: 'Already exist' });
       return;
     }
-    const insertionInfo = await (await dbClient.usersCollection())
+    const insertionInfo = await (await clientDb.usersCollection())
       .insertOne({ email, password: sha1(password) });
     const userId = insertionInfo.insertedId.toString();
 
